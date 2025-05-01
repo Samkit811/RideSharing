@@ -7,6 +7,7 @@ public class Passenger {
     public Passenger(String name, Integer id){
         this.name = name;
         this.id = id;
+        this.money = 0;
     }
 
     public String getName() {
