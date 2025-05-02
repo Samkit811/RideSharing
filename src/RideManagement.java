@@ -28,8 +28,22 @@ public class RideManagement implements RideManagementPublisher{
     }
 
     @Override
-    public void notifyDrivers() {
-
+    public void notifyDrivers(Ride ride) {
+        Boolean isDriverAssign = false;
+        for(Driver driver: this.driverHashMap.values()){
+            if(driver.getDriverType() == DriverType.AVAILABLE){
+                if(driver.notifyRide(ride)){
+                    System.out.println("Driver: " + driver.getName() + " has accepted ride");
+                    ride.setDriver(driver);
+                    this.startRide(ride);
+                    isDriverAssign = true;
+                    break;
+                }
+            }
+        }
+        if(isDriverAssign == false){
+            this.cancelRide(ride);
+        }
     }
 
     @Override
@@ -51,6 +65,7 @@ public class RideManagement implements RideManagementPublisher{
         }
         this.rideHashMap.put(ride.getId(), ride);
         this.requestRideQueue.add(ride);
+        this.notifyDrivers(ride);
     }
 
     @Override
@@ -60,5 +75,14 @@ public class RideManagement implements RideManagementPublisher{
         }
         this.requestRideQueue.remove(ride);
         this.rideHashMap.remove(ride.getId());
+    }
+
+    public void startRide(Ride ride){
+        ride.startRide();
+    }
+
+    public void cancelRide(Ride ride){
+        ride.cancelRide();
+        this.removeRide(ride);
     }
 }
