@@ -5,13 +5,19 @@ public class Ride {
     private Integer price;
     private Passenger passenger;
     private Driver driver;
+    private Integer id;
 
-    public Ride(Passenger passenger, Location sourceLocation, Location destinationLocation){
+    public Ride(Passenger passenger, Location sourceLocation, Location destinationLocation, Integer id){
         this.passenger = passenger;
         this.rideType = RideType.REQUESTED;
         this.sourceLocation = sourceLocation;
         this.destinationLocation = destinationLocation;
+        this.id = id;
         this.calculateRideFair();
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public void updateSourceLocation(Location location){
@@ -39,6 +45,10 @@ public class Ride {
     public void setDriver(Driver driver) {
         this.driver = driver;
         this.setRideType(RideType.ACCEPTED);
+    }
+
+    public RideType getRideType() {
+        return rideType;
     }
 
     private void setRideType(RideType rideType) {
