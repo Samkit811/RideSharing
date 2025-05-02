@@ -1,4 +1,4 @@
-public class Driver {
+public class Driver implements DriverObserver {
     private String name;
     private Integer id;
     private DriverType driverType;
@@ -24,15 +24,24 @@ public class Driver {
         return name;
     }
 
-    public DriverType getDriverType() {
-        return driverType;
-    }
-
     public void setDriverType(DriverType driverType) {
         this.driverType = driverType;
     }
 
     public void addMoney(Integer money){
         this.money += money;
+    }
+
+    @Override
+    public Boolean notifyRide(Ride ride) {
+        if(ride.getPrice() > 50.0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public DriverType getDriverType() {
+        return driverType;
     }
 }
