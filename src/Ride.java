@@ -56,13 +56,24 @@ public class Ride {
     }
 
     public void startRide(){
-        System.out.println("Ride is started");
+        System.out.println("Ride is started with driver: " + this.driver.getName() + " and passenger: " + this.passenger.getName());
         this.setRideType(RideType.IN_PROGRESS);
+        this.driver.setDriverType(DriverType.BUSY);
         this.completedRide();
     }
 
     public void completedRide(){
+        System.out.println("Ride is completed with driver: " + this.driver.getName() + " and passenger: " + this.passenger.getName());
+        System.out.println("Ride fare: " + this.price);
+        if(this.passenger.getMoney() < this.price){
+            System.out.println("Pay using other Methods");
+        } else {
+            System.out.println("Paying via app wallet");
+            this.passenger.subtractMoney(this.price);
+        }
+        this.driver.addMoney(this.price);
         this.setRideType(RideType.COMPLETED);
+        this.driver.setDriverType(DriverType.AVAILABLE);
     }
 
     public void cancelRide(){
