@@ -57,4 +57,8 @@ public class Ride {
     public void cancelRide(){
         this.setRideType(RideType.CANCELLED);
     }
+
+    public Integer getPrice() {
+        return price;
+    }
 }
