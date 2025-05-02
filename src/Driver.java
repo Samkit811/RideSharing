@@ -12,6 +12,10 @@ public class Driver implements DriverObserver {
         this.money = 0;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public void setLocation(Location location) {
         this.location = location;
     }
