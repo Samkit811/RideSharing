@@ -58,6 +58,7 @@ public class Ride {
     public void startRide(){
         System.out.println("Ride is started");
         this.setRideType(RideType.IN_PROGRESS);
+        this.completedRide();
     }
 
     public void completedRide(){
