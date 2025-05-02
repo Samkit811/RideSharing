@@ -38,7 +38,7 @@ public class Driver implements DriverObserver {
 
     @Override
     public Boolean notifyRide(Ride ride) {
-        if(ride.getPrice() > 50.0){
+        if(ride.getPrice() > 50.0 && ride.getRideType() == RideType.REQUESTED){
             return true;
         }
         return false;
